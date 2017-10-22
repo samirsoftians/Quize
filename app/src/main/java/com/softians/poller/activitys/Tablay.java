@@ -2,13 +2,16 @@ package com.softians.poller.activitys;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -16,12 +19,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.softians.poller.R;
 import com.softians.poller.adapter.ViewPagerAdapter;
 import com.softians.poller.app.Config;
 import com.softians.poller.fragments.fragment_question;
 import com.softians.poller.fragments.fragment_user_stats;
 import com.softians.poller.fragments.fragment_winners;
+import com.softians.poller.R;
 
 
 public class Tablay extends AppCompatActivity {
@@ -38,6 +41,9 @@ public class Tablay extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablay);
+        final SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        Config.email=(mSharedPreference.getString("Email", "Default_Value"));
+      // Config.email= sharedpreferences.getString(Email, "");
          bindview();
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -45,7 +51,7 @@ public class Tablay extends AppCompatActivity {
                 if(intent.getAction().equals(Config.REGISTRATION_COMPLETE))
                 {
                     FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
-                    displayFirebaseRegId();
+                    //displayFirebaseRegId();
                 }
                 else if(intent.getAction().equals(Config.PUSH_NOTIFICATION))
                 {
@@ -57,7 +63,14 @@ public class Tablay extends AppCompatActivity {
         int page = getIntent().getIntExtra("position",defaultPos);
         viewPager.setCurrentItem(page);
 
-        displayFirebaseRegId();
+        //displayFirebaseRegId();
+
+
+
+
+
+
+
     }
     private void displayFirebaseRegId()
     {
@@ -113,4 +126,41 @@ public class Tablay extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+
+
+
+        //super.onBackPressed();
+        Log.d("back button", "back button pressed");
+        AlertDialog.Builder ad1 = new AlertDialog.Builder(this);
+        ad1.setMessage("Are you sure you want to exit ?");
+        ad1.setCancelable(false);
+
+
+        ad1.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+
+            }
+        });
+
+        ad1.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                Intent intent=new Intent(Tablay.this,ProfilePage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+                startActivity(intent);
+                finish();
+
+
+            }
+        });
+        AlertDialog alert = ad1.create();
+        alert.show();
+
+    }
+
 }

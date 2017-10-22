@@ -18,7 +18,7 @@
         app:donut_unfinished_color="@color/black"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:donut_progress="0"
+        app:donut_progress="45"
 
         android:id="@+id/donutProgress" />
     <View
@@ -49,7 +49,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_7"
+        android:text="1"
         android:textSize="80dp"
         android:textColor="@color/blacks"
         android:id="@+id/ValueForTotalTests"

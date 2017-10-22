@@ -15,5 +15,13 @@ public class Config {
     public static final int NOTIFICATION_ID = 100;
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
 
-    public static final String SHARED_PREF = "ah_firebase";
+    public static final String SHARED_PREF = "details";
+
+    public static  String module ;
+    public static  int navi =0;
+
+    public static  String email;
+    public static  String token;
+
+
 }

@@ -1,6 +1,7 @@
 package com.softians.poller.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.softians.poller.R;
 import com.softians.poller.adapter.CustomAdapterTopics;
+import com.softians.poller.model.CommonFloatingThings;
 import com.softians.poller.model.TopicList;
 
 import org.json.JSONArray;
@@ -27,8 +29,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class fragment_question extends Fragment implements View.OnClickListener {
 
+public class fragment_question extends Fragment implements View.OnClickListener {
+     ProgressDialog myPd_ring;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     CustomAdapterTopics customAdapter;
@@ -41,6 +44,26 @@ public class fragment_question extends Fragment implements View.OnClickListener 
 
         View view = inflater.inflate(R.layout.fragment_question_topics,
                 container, false);
+
+
+
+         myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
+
+        myPd_ring.setCancelable(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                try
+                {
+                    Thread.sleep(10000);
+                }catch(Exception e){
+
+                }
+
+            }
+        }).start();
+
 
 
         recyclerView = (RecyclerView)view.findViewById(R.id.topics_recycler_view);
@@ -76,10 +99,13 @@ public class fragment_question extends Fragment implements View.OnClickListener 
             protected Void doInBackground(Integer... params) {
                 OkHttpClient client = new OkHttpClient();
                 //Request request =new Request.Builder().url(String.format("%s%s%d", CommonFloatingThings.links,"json_provider_for_recycler.php?id=",id)).build();
-                Request request =new Request.Builder().url("http://192.168.1.104:802/poller/json_provider_for_recycler.php?id="+id).build();
+                Request request =new Request.Builder().url(CommonFloatingThings.json_provider_for_recycler+id).build();
                 try {
                     Response response = client.newCall(request).execute();
                     JSONArray jArray = new JSONArray(response.body().string());
+
+                    myPd_ring.dismiss();
+
                     for(int i=0;i<jArray.length();i++)
                     {
 

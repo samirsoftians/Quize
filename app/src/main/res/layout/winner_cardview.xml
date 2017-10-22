@@ -25,7 +25,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/pic1"/>
+                android:src="@drawable/prifileimage"/>
 
             <TextView
                 android:id="@+id/winnersName"

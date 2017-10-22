@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.softians.poller.activitys.SplashScreenActivity">
+    android:background="#18777b"
+    tools:context="com.softians.poller.activitys.SplashScreenActivity"
+    >
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+
+        android:textColor="#fff"
+        android:textAlignment="center"
+android:text="Quiz Play"
+
+android:textSize="70dp"
+        android:gravity="center"
+        android:layout_width="800dp"
+        android:layout_height="800dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+         />
+
+    <!--<ImageView-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:foregroundGravity="center"-->
+        <!--android:src="@drawable/logo"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="500dp" />-->
+
+</RelativeLayout>

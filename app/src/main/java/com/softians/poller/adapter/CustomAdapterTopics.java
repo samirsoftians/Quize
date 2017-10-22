@@ -13,13 +13,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.softians.poller.R;
-import com.softians.poller.activitys.ShowQuestionList;
+import com.softians.poller.activitys.ShowQuestion;
+import com.softians.poller.app.Config;
 import com.softians.poller.model.TopicList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 /**
  * Created by HP on 05-09-2017.
@@ -142,8 +144,23 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
         @Override
         public void onClick(View v) {
             int sendTopicId = topicLists.get(getAdapterPosition()).getId();
-            Intent toQuestion = new Intent(pContext, ShowQuestionList.class);
-            toQuestion.putExtra("topicId",sendTopicId);
+//**************************Shared preference**********************************
+
+
+            String l= String.valueOf(sendTopicId);
+
+//            SharedPreferences.Editor editor = sharedpreferences.edit();
+//
+//            editor.putString(lastmodule, l);
+//
+//            editor.commit();
+
+
+            //*********************Shared Preference ends here*********************
+            Intent toQuestion = new Intent(pContext, ShowQuestion.class);//ShowQuestionList.class
+          //  toQuestion.putExtra("topicId",sendTopicId);
+
+            Config.module= String.valueOf(sendTopicId);
             pContext.startActivity(toQuestion);
         }
     }
