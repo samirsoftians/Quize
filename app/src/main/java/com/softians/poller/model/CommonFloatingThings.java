@@ -21,4 +21,5 @@ public class CommonFloatingThings {
     public static final String list_of_questions_feed=links+"list_of_questions_feed.php?id=";
     public static final String json_provider_for_recycler=links+"json_provider_for_recycler.php?id=";
     public static final String winners_feed=links+"winners_feed.php?id=";
+    public static final String winners=links+"winners.php";
 }
