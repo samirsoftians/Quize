@@ -1,6 +1,7 @@
 package com.softians.poller.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,6 +43,7 @@ public class fragment_user_stats extends Fragment {
     private TextView pTestsTaken;
     public static String nots;
     public static int percent = 65;
+    ProgressDialog myPd_ring;
 
     int totalscore=55;
 
@@ -53,6 +55,7 @@ public class fragment_user_stats extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
+        myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
 
         View view = inflater.inflate(R.layout.fragment_fragment_user_stats,
                 container, false);
@@ -73,7 +76,7 @@ public class fragment_user_stats extends Fragment {
         StringRequest stringRequest841 = new StringRequest(CommonFloatingThings.score+Config.email, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //myPd_ring.dismiss();
+                myPd_ring.dismiss();
 
               //  Toast.makeText(getContext(),response,Toast.LENGTH_LONG ).show();
                 //    myPd_ring.dismiss();
@@ -145,7 +148,7 @@ public class fragment_user_stats extends Fragment {
         StringRequest stringRequest841 = new StringRequest(CommonFloatingThings.marks+Config.email, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //myPd_ring.dismiss();
+                myPd_ring.dismiss();
 
             //    Toast.makeText(getContext(),response,Toast.LENGTH_LONG ).show();
                 //    myPd_ring.dismiss();

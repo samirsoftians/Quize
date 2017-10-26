@@ -43,7 +43,7 @@ public class Registration extends AppCompatActivity {
     private LinearLayout coolLinearLayout;
     AlertDialog.Builder builder ;
     public static String userName,email,phone,address,password,cnfpassword,userId,imageLink,token;
-    String reg_url = "http://samirsoftians.000webhostapp.com/poller2/register.php";
+    String reg_url = "http://softianstech.com/quizplay/quizplay_app/register.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

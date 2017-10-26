@@ -41,7 +41,7 @@ public class LoginRegister extends AppCompatActivity {
     MyEditText email,pas;
     public static String userId,userName;
     AlertDialog.Builder builder ;
-    String log_url = "http://samirsoftians.000webhostapp.com/poller2/login.php";
+    String log_url = "http://softianstech.com/quizplay/quizplay_app/login.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SystemClock.sleep(1000);

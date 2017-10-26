@@ -73,20 +73,22 @@ public class CustomList extends ArrayAdapter<String> {
 
         TextView textId = (TextView) listViewItem.findViewById(R.id.winnersName);
         ImageView profilePic=(ImageView) listViewItem.findViewById(R.id.profilePic);
+        Bitmap bitmap2= BitmapFactory.decodeResource(context.getResources(),R.drawable.prifileimage);
+
 
 
 
         if(images[position].equals(null))
         {
-            textId.setText(names[position]);
-            //profilePic.setImageBitmap(R.drawable.prifileimage);
+            textId.setText(names[position]+" "+"has won");
+            profilePic.setImageBitmap(bitmap2);
         }
         else
         {
             try{
                 byte [] encodeByte=Base64.decode(images[position], Base64.DEFAULT);
                 Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-                textId.setText(names[position]);
+                textId.setText(names[position]+" "+"has won");
                 profilePic.setImageBitmap(bitmap);
 
             }catch(Exception e){

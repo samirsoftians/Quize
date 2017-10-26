@@ -152,10 +152,18 @@ public class ProfilePage extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Config.navi=1;
-                Intent intent = new Intent(ProfilePage.this,Samir_Login.class);
 
+
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
                 startActivity(intent);
                 finish();
+                System.exit(0);
+//                Intent intent = new Intent(ProfilePage.this,Samir_Login.class);
+//
+//                startActivity(intent);
+//                finish();
 
 
 

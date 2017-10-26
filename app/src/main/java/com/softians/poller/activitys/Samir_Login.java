@@ -57,6 +57,7 @@ public class Samir_Login extends AppCompatActivity{
     Button login_submit;
 
     int valid=0;
+    String status;
 
     RequestQueue requestQueue;
 
@@ -101,6 +102,10 @@ public class Samir_Login extends AppCompatActivity{
         login_signup1= (TextView) findViewById(R.id.login_signup1);
         login_signup2= (TextView) findViewById(R.id.login_signup2);
         forgot_pasword= (TextView) findViewById(R.id.forgot_pasword);
+
+        login_email.setText("");
+        login_password.setText("");
+
 
         forgot_pasword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,22 +167,22 @@ public class Samir_Login extends AppCompatActivity{
 
 
 
-                     myPd_ring= ProgressDialog.show(Samir_Login.this, "", "Please wait......", true);
+                     myPd_ring= ProgressDialog.show(Samir_Login.this, "", "Please wait....", true);
 
-                    myPd_ring.setCancelable(true);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            try
-                            {
-                                Thread.sleep(10000);
-                            }catch(Exception e){
-
-                            }
-
-                        }
-                    }).start();
+//                    myPd_ring.setCancelable(true);
+//                    new Thread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            // TODO Auto-generated method stub
+//                            try
+//                            {
+//                                Thread.sleep(10000);
+//                            }catch(Exception e){
+//
+//                            }
+//
+//                        }
+//                    }).start();
 
                     //Toast.makeText(Samir_Login.this, "Please wait.....", Toast.LENGTH_SHORT).show();
                     StringRequest request = new StringRequest(Request.Method.POST, CommonFloatingThings.login, new Response.Listener<String>() {
@@ -189,17 +194,20 @@ public class Samir_Login extends AppCompatActivity{
 
 
                             // Variables.CheckSecondNavigation=1;
+                            status=response;
+
 
 
                             // Toast.makeText(getContext(),  String.valueOf(sharedpreferences.getString(FirebaseInstanceIDService.userToken, "")), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Samir_Login.this, response, Toast.LENGTH_SHORT).show();
 
 
                             if(response.trim().equals("Login Successful"))
                             {
                                 updatetoken();
 
-//                                myPd_ring.dismiss();
+                                myPd_ring.dismiss();
+
+                                Toast.makeText(Samir_Login.this, "Please Wait...", Toast.LENGTH_LONG).show();
 //
 //                                Intent intent=new Intent(Samir_Login.this,ProfilePage.class);
 //                                startActivity(intent);
@@ -222,6 +230,12 @@ public class Samir_Login extends AppCompatActivity{
 //                                Intent intent=new Intent(Samir_Login.this,ProfilePage.class);
 //                                startActivity(intent);
 
+                            }
+                            else
+                            {
+                                myPd_ring.dismiss();
+
+                                Toast.makeText(Samir_Login.this, response, Toast.LENGTH_SHORT).show();
                             }
 
 
@@ -361,7 +375,9 @@ public class Samir_Login extends AppCompatActivity{
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(Samir_Login.this, response, Toast.LENGTH_SHORT).show();
+                myPd_ring.dismiss();
+
+                Toast.makeText(Samir_Login.this, status, Toast.LENGTH_SHORT).show();
                 Config.email=login_email.getText().toString();
                 String e = login_email.getText().toString();
                 String n = login_password.getText().toString();
@@ -375,7 +391,7 @@ public class Samir_Login extends AppCompatActivity{
 
 
 
-                myPd_ring.dismiss();
+                
 
                 Intent intent=new Intent(Samir_Login.this,ProfilePage.class);
                 startActivity(intent);

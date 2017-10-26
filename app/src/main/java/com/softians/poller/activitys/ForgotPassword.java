@@ -19,6 +19,7 @@ import com.softians.poller.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static com.softians.poller.model.CommonFloatingThings.forgot;
 
@@ -43,41 +44,64 @@ public class ForgotPassword  extends Activity {
         forgot_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //////========================================================================================================
-
-                StringRequest request1 = new StringRequest(Request.Method.POST, forgot, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
 
-                        System.out.println(response.toString());
+                if (!checkEmail(forgot_email.getText().toString())) {
+                    forgot_email.setError("Invalid Email");
 
-                        Toast.makeText(ForgotPassword.this, response, Toast.LENGTH_LONG).show();
+                    // Toast.makeText(SignUpActivity.this, "Paswword lenght should be greater than 6 char", Toast.LENGTH_SHORT).show();
+
+                } else {
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                    //////========================================================================================================
 
-                    }
-                }) {
+                    StringRequest request1 = new StringRequest(Request.Method.POST, forgot, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
 
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> parameters = new HashMap<String, String>();
-                        parameters.put("email", forgot_email.getText().toString());
 
-                        return parameters;
-                    }
-                };
-                requestQueue7.add(request1);
-                //=============================================================================================================
-                Intent i = new Intent(ForgotPassword.this, Samir_Login.class);
-                startActivity(i);
-                finish();
+                            System.out.println(response.toString());
+
+                            Toast.makeText(ForgotPassword.this, response, Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }) {
+
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> parameters = new HashMap<String, String>();
+                            parameters.put("email", forgot_email.getText().toString());
+
+                            return parameters;
+                        }
+                    };
+                    requestQueue7.add(request1);
+                    //=============================================================================================================
+                    Intent i = new Intent(ForgotPassword.this, Samir_Login.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
 
     }
+    private boolean checkEmail(String email) {
+        return EMAIL_ADDRESS_PATTERN.matcher(email).matches();
+    }
+    public final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9+._%-+]{1,256}" +
+                    "@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
+                    "(" +
+                    "." +
+                    "[a-zA-Z0-9][a-zA-Z0-9-]{0,25}" +
+                    ")+"
+    );
 }
