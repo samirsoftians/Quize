@@ -352,13 +352,14 @@ public class Samir_Login extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Config.navi = 0;
-                //ExitActivity.exitApplication(context);
+                ExitActivity.exitApplication(context);
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
                 startActivity(intent);
                 finish();
                 System.exit(0);
+
 
 
             }

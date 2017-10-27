@@ -78,7 +78,7 @@ public class CustomList extends ArrayAdapter<String> {
 
 
 
-        if(images[position].equals(null))
+        if(images[position].equals(""))
         {
             textId.setText(names[position]+" "+"has won");
             profilePic.setImageBitmap(bitmap2);

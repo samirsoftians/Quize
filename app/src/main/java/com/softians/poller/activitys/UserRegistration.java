@@ -94,7 +94,6 @@ public class UserRegistration extends AppCompatActivity {
                     StringRequest request = new StringRequest(Request.Method.POST, CommonFloatingThings.registration, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(UserRegistration.this, response, Toast.LENGTH_SHORT).show();
 
 
 
