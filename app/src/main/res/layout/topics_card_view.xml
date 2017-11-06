@@ -31,37 +31,45 @@
             android:layout_height="wrap_content"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:id="@+id/taimedateRelativelayoutID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
+
                 <TextView
+                  android:textSize="20dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/topicID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/taimedateRelativelayoutID"
+                    android:layout_marginTop="10dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="25dp"
+                    android:text="Topic_name"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_gravity="center"
                     android:id="@+id/timerID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="timer"
                     android:textSize="12sp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
-            </RelativeLayout>
+            </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/topicID"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/taimedateRelativelayoutID"
-                android:layout_marginTop="15dp"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="25dp"
-                android:text="Topic_name"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

@@ -56,7 +56,7 @@ public class fragment_winners extends Fragment {
         listView= (ListView) view.findViewById(R.id.listView);
 
         requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(getContext());
-        myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
+       // myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
 
 
 
@@ -72,7 +72,7 @@ public class fragment_winners extends Fragment {
         StringRequest stringRequest8415 = new StringRequest(winners, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                myPd_ring.dismiss();
+              //  myPd_ring.dismiss();
 
                //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
 //                Toast.makeText(getContext(), Variables.client_email, Toast.LENGTH_LONG).show();

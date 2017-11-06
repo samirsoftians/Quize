@@ -22,6 +22,8 @@ public class Config {
 
     public static  String email;
     public static  String token;
+    public static String startTime;
+    public static String endTime;
 
 
 }
