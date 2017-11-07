@@ -25,13 +25,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.softians.poller.R;
+import com.softians.poller.activitys.ParseJSON_Module;
 import com.softians.poller.adapter.CustomAdapterTopics;
 import com.softians.poller.model.CommonFloatingThings;
 import com.softians.poller.model.TopicList;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,12 +90,15 @@ public class fragment_question extends Fragment implements View.OnClickListener 
         recyclerView = (RecyclerView)view.findViewById(R.id.topics_recycler_view);
         recyclerView.setHasFixedSize(true);
         topicLists = new ArrayList<>();
-        load_topic_from_server(0);
-        //load();
+    //    load_topic_from_server(0);
+        load();
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         customAdapter = new CustomAdapterTopics(this.getContext(),topicLists);
         recyclerView.setAdapter(customAdapter);
+
+      //  myPd_ring.dismiss();
+
         /*recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -108,7 +111,14 @@ public class fragment_question extends Fragment implements View.OnClickListener 
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if(linearLayoutManager.findLastCompletelyVisibleItemPosition()==topicLists.size()-1)
                 {
-                    load_topic_from_server(topicLists.get(topicLists.size()-1).getId());
+//                    load_topic_from_server(topicLists.get(topicLists.size()-1).getId());
+
+                   // load(topicLists.get(topicLists.size()-1).getId());
+
+
+                  //  ID=topicLists.get(topicLists.size()-1).getId();
+                    //load();
+
                 }
             }
         });
@@ -130,17 +140,17 @@ public class fragment_question extends Fragment implements View.OnClickListener 
 
 
 
-                    for(int i=0;i<jArray.length();i++)
-                    {
-
-                        JSONObject jsonObject = jArray.getJSONObject(i);
-                        com.softians.poller.app.Config.startTime=jsonObject.getString("start_tr");
-                        com.softians.poller.app.Config.endTime=jsonObject.getString("end_tr");
-                        String longtostr = String.valueOf(jsonObject.getLong("end_tr"));
-                        TopicList topic = new TopicList(jsonObject.getInt("id"),longtostr,jsonObject.getString("topics"));
-                        topicLists.add(topic);
-
-                    }
+//                    for(int i=0;i<jArray.length();i++)
+//                    {
+//
+//                        JSONObject jsonObject = jArray.getJSONObject(i);
+//                        com.softians.poller.app.Config.startTime=jsonObject.getString("start_tr");
+//                        com.softians.poller.app.Config.endTime=jsonObject.getString("end_tr");
+//                        String longtostr = String.valueOf(jsonObject.getLong("end_tr"));
+//                        TopicList topic = new TopicList(jsonObject.getInt("id"),longtostr,jsonObject.getString("topics"));
+//                        topicLists.add(topic);
+//
+//                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -176,10 +186,14 @@ public class fragment_question extends Fragment implements View.OnClickListener 
             @Override
             public void onResponse(String response) {
 
-                //Toast.makeText(ShowQuestion.this, "Answer Submitted", Toast.LENGTH_LONG).show();
                 myPd_ring.dismiss();
 
+                //Toast.makeText(ShowQuestion.this, "Answer Submitted", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
 
+              // Toast.makeText(getContext(), "Please wait....", Toast.LENGTH_LONG).show();
+
+                showJSON(response);
 
 
 
@@ -236,5 +250,41 @@ public class fragment_question extends Fragment implements View.OnClickListener 
         requestQueue.add(request);
 
     }
+
+
+
+
+    private void showJSON(String json){
+        ParseJSON_Module pj = new ParseJSON_Module(json);
+        pj.parseJSON();
+
+
+
+        for(int i=0;i<ParseJSON_Module.length;i++)
+        {
+
+            TopicList topic = new TopicList(ParseJSON_Module.ids[i],ParseJSON_Module.end_tr[i],ParseJSON_Module.topics[i]);
+            topicLists.add(topic);
+            customAdapter.notifyDataSetChanged();
+
+        }
+
+
+
+
+
+
+
+//        CustomList c1 = new CustomList(getActivity(), ParseJSON.ids, ParseJSON.locations, ParseJSON.qualifications,ParseJSON.experiences,ParseJSON.subjects,ParseJSON.useremail);
+//        listView.setAdapter(c1);
+
+
+
+
+
+
+
+    }
+
 
 }

@@ -9,8 +9,8 @@ public class TopicList {
     String pTopicName;
     public String pEndTimer;
 
-    public TopicList(int id, String pEndTimer, String pTopicName) {
-        this.id = id;
+    public TopicList(String id, String pEndTimer, String pTopicName) {
+        this.id = Integer.parseInt(id);
         this.pEndTimer = pEndTimer;
         this.pTopicName = pTopicName;
     }

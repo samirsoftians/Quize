@@ -56,13 +56,13 @@ public class fragment_winners extends Fragment {
         listView= (ListView) view.findViewById(R.id.listView);
 
         requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(getContext());
-       // myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
+     //   myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
 
 
 
 
 
-
+       // Toast.makeText(getContext(), "please wait....", Toast.LENGTH_LONG).show();
 
 
 
@@ -72,12 +72,15 @@ public class fragment_winners extends Fragment {
         StringRequest stringRequest8415 = new StringRequest(winners, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-              //  myPd_ring.dismiss();
+                myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
 
                //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
 //                Toast.makeText(getContext(), Variables.client_email, Toast.LENGTH_LONG).show();
 
+
                 showJSON(response);
+
+
             }
         },
                 new Response.ErrorListener() {
@@ -231,13 +234,17 @@ public class fragment_winners extends Fragment {
     //**********************************************************************************************************
 
     private void showJSON(String json){
+
+       // Toast.makeText(getContext(), "please wait....", Toast.LENGTH_SHORT).show();
         ParseWinner pj = new ParseWinner(json);
         pj.parseJSON();
 
         // Toast.makeText(getContext(),ParseJSON.su, Toast.LENGTH_SHORT).show();
        CustomList c1 = new CustomList(getActivity(), ParseWinner.ids, ParseWinner.names,ParseWinner.images );
-       listView.setAdapter(c1);
 
+
+       listView.setAdapter(c1);
+        myPd_ring.dismiss();
 
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View view,

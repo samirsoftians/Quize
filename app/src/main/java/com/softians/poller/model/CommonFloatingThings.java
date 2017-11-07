@@ -5,8 +5,8 @@ package com.softians.poller.model;
  */
 
 public class CommonFloatingThings {
-    //public static final String links= "http://softianstech.com/quizplay/quizplay_app/";
-    public static final String links= "http://samirsoftians.000webhostapp.com/poller2/";//http://samirsoftians.000webhostapp.com/poller2/
+   public static final String links= "http://softianstech.com/quizplay/quizplay_app/";
+    //public static final String links= "http://samirsoftians.000webhostapp.com/poller2/";
     public static String registration=links+"user_register.php";
     public static String login=links+"user_login.php";
     public static String forgot=links+"forgot.php";
