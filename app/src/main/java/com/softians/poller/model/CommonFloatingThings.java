@@ -5,8 +5,8 @@ package com.softians.poller.model;
  */
 
 public class CommonFloatingThings {
-   public static final String links= "http://softianstech.com/quizplay/quizplay_app/";
-    //public static final String links= "http://samirsoftians.000webhostapp.com/poller2/";
+  // public static final String links= "http://softianstech.com/quizplay/quizplay_app/";
+    public static final String links= "http://samirsoftians.000webhostapp.com/poller2/";
     public static String registration=links+"user_register.php";
     public static String login=links+"user_login.php";
     public static String forgot=links+"forgot.php";
@@ -21,7 +21,7 @@ public class CommonFloatingThings {
     public static final String list_of_questions_feed=links+"list_of_questions_feed.php?id=";
     public static final String json_provider_for_recycler=links+"json_provider_for_recycler.php?id=";
     public static final String winners_feed=links+"winners_feed.php?id=";
-    public static final String winners=links+"winners.php";
+    public static final String winners=links+"winners.php?id=";
 }
 //jsonQuestionAnswer.php
 //list_of_questions_feed.php

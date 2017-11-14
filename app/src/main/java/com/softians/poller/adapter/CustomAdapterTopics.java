@@ -56,6 +56,8 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
         viewHolderlist = new ArrayList<>();
         startUpdateTimer();
     }
+
+    //*********************************************************************************
     private void startUpdateTimer()
     {
         Timer tmr = new Timer();
@@ -66,7 +68,7 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
             }
         },1000,1000);
     }
-
+//*******************************************************************************************************
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.topics_card_view,parent,false);
@@ -98,6 +100,33 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
         public TextView pTimer,pTopics;
         TopicList mTopicList;
@@ -109,9 +138,11 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
             pTopics.setText(mTopicList.getpTopicName());
             updateTimeRemaining(System.currentTimeMillis());
         }
+
+        //********************************************************************************
         public void updateTimeRemaining( long timesNow)
         {
-            long getEndtime = Long.parseLong(mTopicList.getpEndTimer());
+            long getEndtime = Long.parseLong(mTopicList.getpEndTimer());//-19800000
             long timeDiff = (getEndtime-timesNow);
             if(timeDiff>0) {
                 int seconds = (int) (timeDiff / 1000) % 60;
@@ -131,6 +162,8 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
 
 
         }
+
+        //********************************************************************************************
         public ViewHolder(View itemView) {
             super(itemView);
             pTimer = (TextView)itemView.findViewById(R.id.timerID);
@@ -165,12 +198,28 @@ public class CustomAdapterTopics extends RecyclerView.Adapter<CustomAdapterTopic
         }
     }
 
-
+//***************************************************************************************************************
     public void removeAt(int position) {
-        topicLists.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, topicLists.size());
-    }
 
+        try
+        {
+            topicLists.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, topicLists.size());
+        }
+        catch(Exception e)
+        {
+            //Toast.makeText(pContext, "Data Refreshed", Toast.LENGTH_SHORT).show();
+        }
+
+
+//        Intent toQuestion = new Intent(pContext, Tablay.class);//ShowQuestionList.class
+//
+//
+//
+//        pContext.startActivity(toQuestion);
+
+    }
+//***************************************************************************************************************
 
 }

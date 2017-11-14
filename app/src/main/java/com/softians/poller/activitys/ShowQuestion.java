@@ -286,6 +286,10 @@ public class ShowQuestion extends AppCompatActivity{
 
                             Toast.makeText(ShowQuestion.this, "Answer submitted successfully", Toast.LENGTH_SHORT).show();
 
+
+                            Tablay.increment=0;
+                            Tablay.check=0;//check=0;
+
                         Intent intent=new Intent(ShowQuestion.this,Tablay.class);
                             startActivity(intent);
                             finish();
@@ -433,61 +437,49 @@ public class ShowQuestion extends AppCompatActivity{
         //***********************************************************************************************************
 
     private void showJSON(String json){
-        ParseJSON pj = new ParseJSON(json);
-        pj.parseJSON();
 
 
-        if(ParseJSON.questions[0].equals("") || ParseJSON.questions[0].equals("null") )
-        {
-            cv_ingredient1.setVisibility(View.GONE);
-        }
 
-        else
-        {
-            question1.setText(ParseJSON.questions[0] );
-        }
+        try {
 
-        if(ParseJSON.questions[1].equals("") || ParseJSON.questions[1].equals("null"))
-        {
-            cv_ingredient2.setVisibility(View.GONE);
-        }
 
-        else
-        {
-            question2.setText(ParseJSON.questions[1] );
+            ParseJSON pj = new ParseJSON(json);
+            pj.parseJSON();
 
-        }
 
-        if(ParseJSON.questions[2].equals("") || ParseJSON.questions[2].equals("null"))
-        {
-            cv_ingredient3.setVisibility(View.GONE);
-        }
-        else
-        {
-            question3.setText(ParseJSON.questions[2]);
+            if (ParseJSON.questions[0].equals("") || ParseJSON.questions[0].equals("null")) {
+                cv_ingredient1.setVisibility(View.GONE);
+            } else {
+                question1.setText(ParseJSON.questions[0]);
+            }
 
-        }
+            if (ParseJSON.questions[1].equals("") || ParseJSON.questions[1].equals("null")) {
+                cv_ingredient2.setVisibility(View.GONE);
+            } else {
+                question2.setText(ParseJSON.questions[1]);
 
-        if(ParseJSON.questions[3].equals("") || ParseJSON.questions[3].equals("null"))
-        {
-            cv_ingredient4.setVisibility(View.GONE);
-        }
-        else
-        {
-            question4.setText(ParseJSON.questions[3]);
+            }
 
-        }
+            if (ParseJSON.questions[2].equals("") || ParseJSON.questions[2].equals("null")) {
+                cv_ingredient3.setVisibility(View.GONE);
+            } else {
+                question3.setText(ParseJSON.questions[2]);
 
-        if(ParseJSON.questions[4].equals("") || ParseJSON.questions[4].equals("null"))
-        {
-            cv_ingredient5.setVisibility(View.GONE);
-        }
-        else
-        {
-            question5.setText(ParseJSON.questions[4]);
+            }
 
-        }
+            if (ParseJSON.questions[3].equals("") || ParseJSON.questions[3].equals("null")) {
+                cv_ingredient4.setVisibility(View.GONE);
+            } else {
+                question4.setText(ParseJSON.questions[3]);
 
+            }
+
+            if (ParseJSON.questions[4].equals("") || ParseJSON.questions[4].equals("null")) {
+                cv_ingredient5.setVisibility(View.GONE);
+            } else {
+                question5.setText(ParseJSON.questions[4]);
+
+            }
 
 
 //        question1.setText(ParseJSON.questions[0]);
@@ -497,15 +489,16 @@ public class ShowQuestion extends AppCompatActivity{
 //        question5.setText(ParseJSON.questions[4]);
 
 
-
 //        // Toast.makeText(getContext(),ParseJSON.su, Toast.LENGTH_SHORT).show();
 //        CustomList c1 = new CustomList(getActivity(), ParseJSON.ids, ParseJSON.locations, ParseJSON.qualifications,ParseJSON.experiences,ParseJSON.subjects,ParseJSON.useremail);
 //        listView.setAdapter(c1);
 
 
+        }
+        catch (Exception e)
+        {
 
-
-
+        }
 
 
     }

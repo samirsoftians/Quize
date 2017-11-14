@@ -18,7 +18,7 @@
         app:donut_unfinished_color="@color/black"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:donut_progress="45"
+        app:donut_progress="0"
 
         android:id="@+id/donutProgress" />
     <View

@@ -59,6 +59,9 @@ public class fragment_user_stats extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_fragment_user_stats,
                 container, false);
+
+
+//        myPd_ring2.dismiss();
         {
 
             sharedpreferences = getContext().getSharedPreferences(mypreference, Context.MODE_PRIVATE);

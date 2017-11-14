@@ -1,5 +1,6 @@
 package com.softians.poller.activitys;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,12 +20,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.softians.poller.R;
 import com.softians.poller.adapter.ViewPagerAdapter;
 import com.softians.poller.app.Config;
 import com.softians.poller.fragments.fragment_question;
 import com.softians.poller.fragments.fragment_user_stats;
 import com.softians.poller.fragments.fragment_winners;
-import com.softians.poller.R;
 
 
 public class Tablay extends AppCompatActivity {
@@ -35,6 +36,10 @@ public class Tablay extends AppCompatActivity {
     public static int defaultPos = 0;
     private BroadcastReceiver mRegistrationBroadcastReceiver ;
     ViewPagerAdapter viewPagerAdapter;
+
+    public  static ProgressDialog myPd_ring2;
+
+   public static int increment=0,check=0;
 
     //CollapsingToolbarLayout collapingsToollbar;
     @Override
@@ -124,12 +129,87 @@ public class Tablay extends AppCompatActivity {
 
         //collapingsToollbar.setTitle("Softians Technology");
 
+//*********************************************************************************************
+      /*  tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                String g= String.valueOf(position);
+
+                if(position==1 && increment<=0)
+                {
+                    check++;
+                    myPd_ring2 = ProgressDialog.show(Tablay.this, "", "Please wait......", true);
+                    myPd_ring2.setCancelable(true);
+
+                    increment++;
+
+                }
+
+//                Toast.makeText(Tablay.this, g, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });*/
+
+//***********************************************************************
+
+//        tablayout.setOnTabSelectedListener(new tablayout.OnTabSelectedListener(){
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab){
+//                int position = tab.getPosition();
+//            }
+//        });
+
+
+
+       /* viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
+
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageSelected(int pos) {
+
+
+
+
+                if(increment<=0) {
+
+
+                    myPd_ring2 = ProgressDialog.show(Tablay.this, "", "Please wait......", true);
+
+                }
+                //This is because progress is 0 at the start of the program
+//                progress++;
+//                ProgressBar progress = (ProgressBar) findViewById(R.id.progressBar);
+//                progress.setProgress(position++);
+            }
+
+        });*/
+
 
     }
     @Override
     public void onBackPressed() {
 
 
+//        myPd_ring2.dismiss();
 
         //super.onBackPressed();
         Log.d("back button", "back button pressed");
@@ -149,6 +229,9 @@ public class Tablay extends AppCompatActivity {
         ad1.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
+
+                Tablay.increment=0;
+                Tablay.check=0;//check=0;
 
                 Intent intent=new Intent(Tablay.this,ProfilePage.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***

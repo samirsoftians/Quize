@@ -42,7 +42,7 @@ public class ProfilePage extends AppCompatActivity {
     public static SharedPreferences sharedpreferences;
 
     private android.support.constraint.ConstraintLayout pConstraintLayout2;
-    private de.hdodenhof.circleimageview.CircleImageView pCircleImageView;
+    private static de.hdodenhof.circleimageview.CircleImageView pCircleImageView;
     private TextView pUserNameTV;
     private android.support.constraint.ConstraintLayout pConstraintLayout3;
     private TextView pStatsTV;
@@ -75,6 +75,12 @@ public class ProfilePage extends AppCompatActivity {
         {
             getImage();
 
+        }
+        else
+        {
+            Intent intent =new Intent(ProfilePage.this,Samir_Login.class);
+            startActivity(intent);
+            finish();
         }
 
         pUserNameTV.setText(Config.email);
@@ -178,12 +184,19 @@ public class ProfilePage extends AppCompatActivity {
     {
 
 
+try
+{
+    Intent intent = new Intent();
+    intent.setType("image/*");
+    intent.setAction(Intent.ACTION_GET_CONTENT);
+    startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+}
+catch (Exception e)
+{
+
+}
 
 
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
 
     }
@@ -235,13 +248,19 @@ public class ProfilePage extends AppCompatActivity {
                 super.onPostExecute(b);
                 // loading.dismiss();
 
-                if(b!= null)
-                {
-                    pCircleImageView.setImageBitmap(b);
+
+                try {
+
+
+                    if (b != null) {
+                        pCircleImageView.setImageBitmap(b);
+                    } else {
+                        pCircleImageView.setImageBitmap(defaultimage);
+
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    pCircleImageView.setImageBitmap(defaultimage);
 
                 }
 

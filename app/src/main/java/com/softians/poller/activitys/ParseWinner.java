@@ -19,6 +19,8 @@ public class ParseWinner {
 
     public static String[] answers;
 
+    public static int imagelength;
+
     public static final String JSON_ARRAY = "result";
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
@@ -43,6 +45,8 @@ public class ParseWinner {
             ids = new String[users.length()];
             names = new String[users.length()];
             images = new String[users.length()];
+
+            imagelength=users.length();
 
 
             for(int i=0;i<users.length();i++){

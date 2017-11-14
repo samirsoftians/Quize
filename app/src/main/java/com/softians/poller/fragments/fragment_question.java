@@ -67,8 +67,13 @@ public class fragment_question extends Fragment implements View.OnClickListener 
 
         sharedpreferences = getContext().getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
+        myPd_ring.setCancelable(true);
+
 
         requestQueue3 = com.android.volley.toolbox.Volley.newRequestQueue(getContext());
+
+
+        //myPd_ring2.dismiss();
 
 //        myPd_ring.setCancelable(true);
 //        new Thread(new Runnable() {

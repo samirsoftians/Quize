@@ -168,7 +168,7 @@ public class Samir_Login extends AppCompatActivity{
 
 
                      myPd_ring= ProgressDialog.show(Samir_Login.this, "", "Please wait....", true);
-
+                    myPd_ring.setCancelable(true);
 //                    myPd_ring.setCancelable(true);
 //                    new Thread(new Runnable() {
 //                        @Override
@@ -387,6 +387,9 @@ public class Samir_Login extends AppCompatActivity{
 
                 myPd_ring.dismiss();
 
+
+               // Toast.makeText(Samir_Login.this, response, Toast.LENGTH_SHORT).show();
+
                 Toast.makeText(Samir_Login.this, status, Toast.LENGTH_SHORT).show();
                 Config.email=login_email.getText().toString();
                 String e = login_email.getText().toString();
@@ -404,7 +407,9 @@ public class Samir_Login extends AppCompatActivity{
                 
 
                 Intent intent=new Intent(Samir_Login.this,ProfilePage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
 
 
 

@@ -60,7 +60,8 @@
         <service
             android:name=".activitys.FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" android:stopWithTask="false"/>
+
             </intent-filter>
         </service>
 

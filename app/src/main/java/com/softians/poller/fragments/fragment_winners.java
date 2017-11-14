@@ -4,6 +4,8 @@ package com.softians.poller.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.softians.poller.R;
-import com.softians.poller.activitys.CustomList;
+import com.softians.poller.activitys.CustomAdapterTopics2;
+import com.softians.poller.activitys.ImageList;
 import com.softians.poller.activitys.ParseWinner;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.softians.poller.activitys.ParseWinner.imagelength;
 import static com.softians.poller.model.CommonFloatingThings.winners;
 
 
@@ -39,6 +46,14 @@ public class fragment_winners extends Fragment {
     ProgressDialog myPd_ring;
 
 
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
+    List<ImageList> topicLists2;
+
+    CustomAdapterTopics2 customAdapter;
+
+   static int size=0;
+
 
 //    RecyclerView winnersRecyclerView;
 //    LinearLayoutManager linearLayoutManager;
@@ -50,32 +65,76 @@ public class fragment_winners extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.display,
-                container, false);
+        View view = inflater.inflate(R.layout.fragment_question_topics,
+                container, false);//display
 
-        listView= (ListView) view.findViewById(R.id.listView);
+        // listView = (ListView) view.findViewById(R.id.listView);
 
-        requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(getContext());
-     //   myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
+          requestQueue = com.android.volley.toolbox.Volley.newRequestQueue(getContext());
+        //*****************************************recycler view added to the winner tab*****************
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.topics_recycler_view);
+       recyclerView.setHasFixedSize(true);
+        topicLists2 = new ArrayList<>();
+        //    load_topic_from_server(0);
+        load(size);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        customAdapter = new CustomAdapterTopics2(this.getContext(), topicLists2);
+        recyclerView.setAdapter(customAdapter);
+
+        //****************************************End or recycler view**********************************
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                myPd_ring = ProgressDialog.show(getContext(), "", "Please wait......", true);
+                myPd_ring.setCancelable(true);
+                if(linearLayoutManager.findLastCompletelyVisibleItemPosition()==topicLists2.size()-1)
+                {
+//                    load_topic_from_server(topicLists.get(topicLists.size()-1).getId());
+
+                    // load(topicLists.get(topicLists.size()-1).getId());
+                    Toast.makeText(getContext(), "Please wait retriving more data", Toast.LENGTH_LONG).show();
 
 
+                    //  ID=topicLists.get(topicLists.size()-1).getId();
+                    load(topicLists2.get(topicLists2.size()-1).getId());
+                 //   myPd_ring2.dismiss();
+                    load(size+4);
+
+                    myPd_ring.dismiss();
+
+                   // String g= String.valueOf(topicLists2.get(topicLists2.size()-1).getId());
+
+                   // Toast.makeText(getContext(), g, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+//*********************************************************************************************************************
+    return view;
+
+    }
 
 
+    public void load(int id) {
 
-       // Toast.makeText(getContext(), "please wait....", Toast.LENGTH_LONG).show();
-
-
+         int size2=id;
+         String i= String.valueOf(size2);
 
         //*************Volley starts*************
 
 
-        StringRequest stringRequest8415 = new StringRequest(winners, new Response.Listener<String>() {
+        StringRequest stringRequest8415 = new StringRequest(winners+i, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                myPd_ring= ProgressDialog.show(getContext(), "", "Please wait......", true);
 
-               //Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-//                Toast.makeText(getContext(), Variables.client_email, Toast.LENGTH_LONG).show();
+
+                //   myPd_ring= ProgressDialog
 
 
                 showJSON(response);
@@ -90,39 +149,23 @@ public class fragment_winners extends Fragment {
                         if (error instanceof NetworkError) {
 
                             //neterror(v);
-                             Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
                         } else if (error instanceof ServerError) {
 
                             Toast.makeText(getContext(), "The server could not be found. Please try again after some time!!", Toast.LENGTH_LONG).show();
                         } else if (error instanceof AuthFailureError) {
                             //neterror(v);
-                             Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection !", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection !", Toast.LENGTH_LONG).show();
                         } else if (error instanceof ParseError) {
                             Toast.makeText(getContext(), "Parsing error! Please try again after some time !!", Toast.LENGTH_LONG).show();
 
                         } else if (error instanceof NoConnectionError) {
-                           // neterror(v);
+                            // neterror(v);
                             Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection !", Toast.LENGTH_LONG).show();
                         } else if (error instanceof TimeoutError) {
-                           // neterror(v);
+                            // neterror(v);
                             Toast.makeText(getContext(), "Cannot connect to Internet...Please check your connection !", Toast.LENGTH_LONG).show();
                         }
-
-                        //Toast.makeText(Update.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
-//                        Config.refresh++;
-//
-//                        if(Config.refresh>2)
-//                        {
-//                            Refresh();
-//                        }
-//                        else
-//                        {
-//                            Intent intent = new Intent(Update2.this, Update2.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("cemail1", myString2);
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                        }
 
 
                     }
@@ -130,12 +173,12 @@ public class fragment_winners extends Fragment {
 
         RequestQueue requestQueue8415 = Volley.newRequestQueue(getContext());
         requestQueue8415.add(stringRequest8415);
-//
 
 
         //****************Volley ends****************
 
 
+    }
 
 
 
@@ -143,27 +186,7 @@ public class fragment_winners extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Inflate the layout for this fragment
+    // Inflate the layout for this fragment
 
 //        View view = inflater.inflate(R.layout.fragment_fragment_winners,
 //                container, false);
@@ -193,8 +216,10 @@ public class fragment_winners extends Fragment {
 //                }
 //            }
 //        });
-      return view;
-   }
+
+
+
+
 //
 //    private void load_winners_from_server(final int id) {
 //        AsyncTask<Integer,Void,Void> winnertask= new AsyncTask<Integer, Void, Void>() {
@@ -233,35 +258,63 @@ public class fragment_winners extends Fragment {
 //        winnertask.execute(id);
     //**********************************************************************************************************
 
+
+
+
+
+
+
     private void showJSON(String json){
-
+    //    myPd_ring.dismiss();
        // Toast.makeText(getContext(), "please wait....", Toast.LENGTH_SHORT).show();
-        ParseWinner pj = new ParseWinner(json);
-        pj.parseJSON();
-
-        // Toast.makeText(getContext(),ParseJSON.su, Toast.LENGTH_SHORT).show();
-       CustomList c1 = new CustomList(getActivity(), ParseWinner.ids, ParseWinner.names,ParseWinner.images );
 
 
-       listView.setAdapter(c1);
-        myPd_ring.dismiss();
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-////                if(Variables.client_email.isEmpty()) {
-//                    Login applyedJob = new Login();
-//                    FragmentTransaction fragmentTransaction =getActivity().getSupportFragmentManager().beginTransaction();
-//                    fragmentTransaction.replace(R.id.frame, applyedJob);
-//                    fragmentTransaction.commit();
-//               // }
-//
-//
-////I ADDED ON CLICK IMPLEMENTATION HERE, BUT THIS IS NOT WORKING
-//                //Toast.makeText(getApplicationContext(), "CLICKED", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        try
+        {
+            ParseWinner pj = new ParseWinner(json);
+            pj.parseJSON();
+
+
+
+
+         //   if(check>0) {
+
+
+               // myPd_ring2.dismiss();
+                // Toast.makeText(getContext(),ParseJSON.su, Toast.LENGTH_SHORT).show();
+               // CustomList c1 = new CustomList(getActivity(), ParseWinner.ids, ParseWinner.names, ParseWinner.images);
+
+
+              //  listView.setAdapter(c1);*/
+
+
+
+
+
+
+                for(int i = 0; i< imagelength; i++)
+                {
+
+                    ImageList topic = new ImageList(ParseWinner.ids[i],ParseWinner.names[i],ParseWinner.images[i]);
+                    topicLists2.add(topic);
+                    customAdapter.notifyDataSetChanged();
+
+                }
+
+
+
+          //  }
+
+
+        }
+        catch (Exception e)
+        {
+
+        }
+
+
+
 
 
 
