@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#7fafea"
+
     tools:context="com.softians.poller.fragments.fragment_question"
     >
 
@@ -23,7 +23,7 @@
         card_view:cardElevation="6dp"
         card_view:cardUseCompatPadding="true"
         card_view:contentPadding="10dp"
-        card_view:cardBackgroundColor="@color/white"
+
         >
 
         <RelativeLayout

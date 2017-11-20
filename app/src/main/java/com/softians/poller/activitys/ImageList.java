@@ -8,12 +8,14 @@ public class ImageList {
 
     private int id;
     String name;
-    public String images;
+    public String images,emails,modules;
 
-    public ImageList(String id, String name, String images) {
+    public ImageList(String id, String name, String images,String email,String modules) {
         this.id = Integer.parseInt(id);
         this.name = name;
         this.images = images;
+        this.emails = email;
+        this.modules = modules;
     }
 
     public int getId() {
@@ -38,5 +40,26 @@ public class ImageList {
 
     public void setpTopicName(String pTopicName) {
         this.images = pTopicName;
+    }
+
+
+
+
+    public String getEmails() {
+        return emails;
+    }
+
+    public void setEmails(String pTopicName) {
+        this.emails = pTopicName;
+    }
+
+
+
+    public String getModules() {
+        return modules;
+    }
+
+    public void setModules(String pTopicName) {
+        this.emails = pTopicName;
     }
 }

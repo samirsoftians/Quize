@@ -14,6 +14,8 @@ public class ParseWinner {
     public static String[] names;
     public static String[] images;
     public static String[] ratings;
+    public static String[] emails;
+    public static String[] modules;
 
     public static String[] questions;
 
@@ -25,6 +27,8 @@ public class ParseWinner {
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String image = "image";
+    public static final String email = "email";
+    public static final String module = "module";
 
 
 
@@ -45,6 +49,8 @@ public class ParseWinner {
             ids = new String[users.length()];
             names = new String[users.length()];
             images = new String[users.length()];
+            emails = new String[users.length()];
+            modules = new String[users.length()];
 
             imagelength=users.length();
 
@@ -60,6 +66,8 @@ public class ParseWinner {
                 ids[i] = jo.getString(KEY_ID);
                 names[i] = jo.getString(KEY_NAME);
                 images[i] = jo.getString(image);
+                emails[i] = jo.getString(email);
+                modules[i] = jo.getString(module);
 
 
             }

@@ -90,8 +90,8 @@ public class fragment_winners extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                myPd_ring = ProgressDialog.show(getContext(), "", "Please wait......", true);
-                myPd_ring.setCancelable(true);
+              //  myPd_ring = ProgressDialog.show(getContext(), "", "Please wait......", true);
+              //  myPd_ring.setCancelable(true);
                 if(linearLayoutManager.findLastCompletelyVisibleItemPosition()==topicLists2.size()-1)
                 {
 //                    load_topic_from_server(topicLists.get(topicLists.size()-1).getId());
@@ -103,9 +103,9 @@ public class fragment_winners extends Fragment {
                     //  ID=topicLists.get(topicLists.size()-1).getId();
                     load(topicLists2.get(topicLists2.size()-1).getId());
                  //   myPd_ring2.dismiss();
-                    load(size+4);
+                    load(size+1);
 
-                    myPd_ring.dismiss();
+                  //  myPd_ring.dismiss();
 
                    // String g= String.valueOf(topicLists2.get(topicLists2.size()-1).getId());
 
@@ -296,7 +296,7 @@ public class fragment_winners extends Fragment {
                 for(int i = 0; i< imagelength; i++)
                 {
 
-                    ImageList topic = new ImageList(ParseWinner.ids[i],ParseWinner.names[i],ParseWinner.images[i]);
+                    ImageList topic = new ImageList(ParseWinner.ids[i],ParseWinner.names[i],ParseWinner.images[i],ParseWinner.emails[i],ParseWinner.modules[i]);
                     topicLists2.add(topic);
                     customAdapter.notifyDataSetChanged();
 
