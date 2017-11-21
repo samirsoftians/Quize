@@ -102,8 +102,11 @@ public class fragment_winners extends Fragment {
 
                     //  ID=topicLists.get(topicLists.size()-1).getId();
                     load(topicLists2.get(topicLists2.size()-1).getId());
+
+                   // String o= String.valueOf(topicLists2.get(topicLists2.size()-1).getId());
+                   // Toast.makeText(getContext(), o, Toast.LENGTH_SHORT).show();
                  //   myPd_ring2.dismiss();
-                    load(size+1);
+                    //load(size+1);***********************************************why dont understand
 
                   //  myPd_ring.dismiss();
 

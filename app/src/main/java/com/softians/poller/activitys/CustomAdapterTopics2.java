@@ -58,6 +58,7 @@ public class CustomAdapterTopics2 extends RecyclerView.Adapter<CustomAdapterTopi
     private final List<ViewHolder2> viewHolderlist2;
     private Handler pHandler = new Handler();
     String feedback="null",feedDetails,demail,selectedModule;
+    int p;
 
 
     public CustomAdapterTopics2(Context pContext, List<ImageList> topicLists) {
@@ -120,7 +121,7 @@ public class CustomAdapterTopics2 extends RecyclerView.Adapter<CustomAdapterTopi
             mTopicList=t;
 
             selectedModule=  mTopicList.getModules();
-
+           // Toast.makeText(pContext, selectedModule, Toast.LENGTH_SHORT).show();
 
             if (mTopicList.getEmails().equals(Config.email) ) {
                // winnerText.setEnabled(true);
@@ -178,14 +179,22 @@ public class CustomAdapterTopics2 extends RecyclerView.Adapter<CustomAdapterTopi
                     @Override
                     public void onClick(View v) {
                      //   Toast.makeText(pContext, "was clicked", Toast.LENGTH_SHORT).show();
+                        p=getAdapterPosition();
+                        String h= String.valueOf(p);
+
+                       // Toast.makeText(pContext, h, Toast.LENGTH_SHORT).show();
 
                         //*********************Display Data*********************************
+//                     String u= String.valueOf(topicLists.get(p).getEmails());
+//                        String uu= String.valueOf(topicLists.get(p).getModules());
+//
+//                      Toast.makeText(pContext, u+uu, Toast.LENGTH_SHORT).show();
 
                         StringRequest request = new StringRequest(Request.Method.POST, CommonFloatingThings.feed2, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
 
-                             //   Toast.makeText(pContext, response, Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(pContext, response, Toast.LENGTH_SHORT).show();
 
                                 JSONObject j = null;
                                 try
@@ -276,9 +285,9 @@ public class CustomAdapterTopics2 extends RecyclerView.Adapter<CustomAdapterTopi
 
 
 
-                                parameters.put("email", Config.email);
+                                parameters.put("email", topicLists.get(p).getEmails());
 
-
+                                parameters.put("module", topicLists.get(p).getModules());
 
 
                                 return parameters;
